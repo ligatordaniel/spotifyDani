@@ -1,0 +1,412 @@
+
+
+
+**********************************FRONT-END**********************************
+
+
+*******es5 a es6********
+
+function pruebas(req, res){
+  res.status(200).send({
+      message: 'Probando accion controlador de usuarios con api rest'
+  });
+}
+
+const pruebas = (req, res) => {
+  res.status(200)
+  .send({message: 'Probando acción controlador de usuarios con api rest'
+  });
+};
+
+
+
+*********Cli Angular*********
+
+npm install -g @angular/cli
+ng new my-dream-app
+cd my-dream-app
+ng g c \components\nombrecomponente    /*crear componente en carpeta components*/
+ng g s nombreservicio                  /*crea servicio*/
+ng serve
+ng serve -o         
+
+ng add @angular/pwa                    /*transforma en PWA*//*mas info en https://www.youtube.com/watch?v=hxFRA4UQ9Ww*/
+
+*********bootstrap Angular********* // o npm install
+
+npm install bootstrap --save
+npm install jquery --save
+npm install popper.js --save
+
+reemplazar en angular.json 
+            "styles": [
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
+
+*********plugins VisualStudioCode Angular*********
+
+//recuerda instalar JSON viewer en chorme tambien
+angular snippets
+angular extension pack
+angular 2 typescript emmet
+JavaScript (ES6) code snippets
+Auto Import
+Auto Import - ES6, TS, JSX, TSX
+Auto Rename Tag
+Beautify
+Bootstrap 4, Font awesome 4, Font Awesome 5 Free & Pro snippets
+Bracket Pair Colorizer
+Color Highlight
+EditorConfig for VS Code
+file-icons
+Gremlins tracker for Visual Studio Code
+html tag wrapper
+IntelliSense for CSS class names in HTML
+JSON to TS
+open in browser
+Panda theme
+TODO Highlight
+
+*********Cuentas**********
+cktraducciones001@gmail.com 1991kksi	
+
+*********Firebase commands*********
+
+firebase init
+firebase deploy
+
+*********Bootstrap filas*********
+    <div class="container row">
+        <div class="col-sm-12 col-md-6 col-lg-6"></div>
+    </div>
+
+*********Git Comandos*********
+
+git init
+git add .
+git add index.html
+
+git commit -m "primer comentario"
+
+git push
+
+git status                       /*hay achivos modificados? en rojo*/
+git checkout -- index.html       /*vuelve a codigo anteriormente*/
+git diff index.html              /*muestra codigo cambiado en terminal*/
+
+git log                          /*muestra todos los commit y  su modificaciones quien hizo el cambio*/
+git log --oneline                /*lo mismo pero pero deducido en 1 linea*/
+
+git reset --hard a532423         /*va a la version ej:a532423*/
+
+git branch                       /*¿en que ramificacion estoy? y cuantas hay*/
+git checkout master              /* vas a la rama master*/
+git checkout -b login            /crear rama login (funcionalidad le dicen no rama :B)/
+git checkout login              /* vas a la rama ej:login*/
+
+git push origin master          /*subir a remoto origin y a la rama master*/
+git push login Fork01           /*subir a remoto login a la rama fork01*/
+
+*********SASS*********
+
+npm install -g sass
+crear carpeta sass con el nombre de style.scss
+luego crear en carpeta css style.css
+
+sass --watch sass:assets/css   /*después de : poner dirección css vacio*/
+
+$base-color: rgb(243,243,243);
+$primary:#67cceb;
+$secondary:rgb(76,83,86);
+.fondo {
+  background-color: $base-color;
+}
+
+*********CSS3*********
+overflow: hidden;              /*no agranda imagen con animacion*/
+
+filter: drop-shadow(5px 5px 5px rgb(26, 25, 25));     /*sombreado*/
+border-radius: 5px;    				     /*redondeado*/
+
+img { 
+      width: 100%;          /*img responsive flojear al centro  y ajustar*/
+      height: auto;
+      display: block;}
+
+margin: 0px auto;              /*centrar contenido dentro del div*/
+
+a {color: rgb(20, 16, 16);}       /*cambiar color ancla a negro*/                   
+     
+***animaciones simple CSS***
+
+/Animacion LatiA
+.animacionLatia{
+    animation-name: animacionLatia;
+    animation-duration: 15s; //regular 15
+    animation-iteration-count: infinite;
+    animation-delay: 3s;
+    opacity: 0;
+    animation-timing-function: ease-in;
+    width: 90px;
+}
+@keyframes animacionLatia {
+    0% {			/*posicion inicial 0%*/
+      position: absolute; 	/*-absolute- referencial elemento mas cercano*/
+      margin-top: 0px;    	/*-relative- debe ser div padre*/
+      margin-left: 95%;
+      opacity: 0;
+
+    }
+    1% {		
+        opacity: 1;
+    }
+    9% {		
+        opacity: 0.8;
+    }
+    10% {			/*posicion final animacion*/
+        position:  absolute; 	
+        margin-top: -200px;
+        margin-left: 0%;
+    }
+    11% {		    /*posicion final hidden*/
+        opacity: 0;
+    }
+    100% {			/*posicion final hidden*/
+        position:  absolute; 	
+        margin-top: -200px;
+        margin-left: 0%;
+        opacity: 0;
+    }
+  }
+
+//Animacion LatiO
+*********Medio Queries**********
+
+@media (orientation: landscape) {
+  .carrousel{
+    max-width: 50%;
+    background-color: red;
+  }
+}
+/*not, only y and => operadores logicos*/
+/*funciona si tiene 700px o mas y la pantalla esta en landscape*/
+@media (min-width: 700px) and (orientation: landscape) {    
+  .player {
+    margin-top: 100px;
+    background-color: blue;
+  }
+}
+/*el que mas uso*/
+@media (min-width: 500px) and (max-width: 1100px) {
+}
+
+*********BOOTSTRAP*********    
+
+<div class="container-fluid">
+ <div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-6">
+   <h3>Columna de 12</h3>
+  </div>   
+ </div>
+</div>
+
+
+
+
+
+
+**********************************BACK-END**********************************
+
+
+
+
+
+
+*------------------Comandos nodejs------------------*
+
+
+npm start               /*partida servidor*/
+npm init                /*crear package.json*/
+npm install             /*instala dependencias del package.json*/
+
+
+*------------------Configuraciones/instalaciones dependencias------------------*
+
+I*********NodeJs**********
+npm install -g npm     		     /*actualiza nodejs*/
+npm install init     		     /*crea*/
+npm install express --save	     /*framework api-rest con protocolo http*/
+npm install bcrypt-nodejs --save    /*encriptar contraseñas*/
+npm install body-parser --save    /*parsear peticiones y trabajar y convertir en objetos*/
+npm install connect-multiparty --save    /*pedir ficheros por file y guardar en servidor*/
+npm install jwt-simple --save    /*autentificacion con tokens*/
+npm install moment --save    /*++++++++++++++++++++++++?*/
+npm install mongoose --save    /*orm que trabajar con base de datos*/
+npm install mongoose-pagination --save
+npm install nodemon --save-dev    /*recargar el servidor por si mismo, -dev- solo funcionara en desarrollo*/ 
+
+2*********NodeJs**********
+
+II*********MongoDB instalacion*********        /*Base de datos no relacional*/
+https://www.mongodb.com/download-center/community     /descargar server
+
+IV*********MongoDB Creacion base de datos**********
+
+1-ir a -> C:\Program Files\MongoDB\Server\4.2\bin
+2-abrir mongod.exe                      /*se cerrara rapidamente sola*/
+3-abrir mongo.exe			/*se abrira una terminal*/
+4.escribir 'use nombreBaseDeDatos'      /*sin comillas*/
+	use spotifydb
+5.escribir titulos de tus diagramas de la base de datos 
+					/*pantallaso en diagramaDBspotyfy.png*/
+db.artists.save({name: 'TommyRey', description: 'Cumbia para fiestas', image: 'null'})
+
+6.comprar guardados del documento artists
+	db.artists.find()
+
+7.comprobar si guardo
+	show collections
+
+8.consultar bases de datos existentes
+	show dbs
+*********MongoDB**********
+
+V**********packgae.json***********
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"			/*comodidad*/
+  },
+
+npm start                 /*arrancar servidor node*/
+
+**********packgae.json***********
+
+
+
+
+
+
+*------------------Codigo util y carpetas------------------*
+
+
+
+
+*********index.js*********** crear index.js para el servidor
+
+*Este es nuestro servidor*/
+/*npm start - iniciar servidor*/
+
+const mongoose = require('mongoose');   /*cargamos libreria mongoose de node_modules*/
+const app = require('./app');           /*cargamos app.js a nuestro servidor*/
+const port = process.env.PORT || 3977;  /*configuramos un puerto (3977) para nuestro servidor*/
+const MONGODB_URI = 'mongodb://localhost:27017/spotifyApp';
+
+
+
+/*conectarservidor*/
+mongoose.connect(MONGODB_URI,{
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+    },(err,res) => {
+    
+    if(err){
+        throw err;
+    }else{
+        console.log('BaseDeDatos Funciona Perfectamente Sr. Daniel')
+    }
+
+    /*ponemos a nuestro servidor a escuchar*/
+    app.listen(port, () =>{
+        console.log('servidor escuchando en http://localhost:'+port);
+    });
+
+});
+
+
+
+
+*********index.js***********
+
+*********app.js***********crear app.js para el servidor
+
+
+const express = require('express');          /*cargamos libreria express de node_modules*/
+const bodyParser = require('body-parser');   /*cargamos libreria body-parser de node_modules*/
+
+const app = express();          /*creamos el objeto express*/
+
+/*Cargar rutas*/
+
+app.use(bodyParser.urlencoded({extended:false}));   /*configuracion body-parser para trabajar json con http*/
+app.use(bodyParser.json());                         /*configuracion body-parser para trabajar json con http*/
+
+/*Confi cabeceras http*/
+
+/*Rutas base*/
+
+app.get('/prueba', function(req, res){
+    res.status(200).send({message:'Tu solicitud GET funciona!'})   /* http://localhost:3977/prueba */
+});
+
+module.exports = app;
+
+
+*********app***********
+
+
+*********user.js***********crear carpeta 'models' y dentro poner modelos como user.js  song.js artist.js etc.
+
+const mongoose = require('mongoose');
+const schema = mongoose.Schema;
+
+
+const userSchema = schema({
+    name: String,
+    surname: String,
+    email: String,
+    password: String,
+    role: String,
+    image: String
+    /*id se genera sola*/
+
+});
+
+module.exports = mongoose.model('user', userSchema);
+
+*********user.js***********
+
+*********artist.js*********** vinculo a otra modelo
+
+const mongoose = require('mongoose');
+const schema = mongoose.Schema;
+
+const artistSchema = schema({
+    name: String,
+    description: String,
+    image: String
+
+});
+
+module.exports = mongoose.model('artist', artistSchema);
+
+*********user.js***********
+
+*******************Codigo Util*********************
+
+/*Cargar rutas*/
+/*const user_routes = require('./routes/user');*/  /*ejemplo ruta*/
+
+/*Rutas base*/
+/*app.use('/api', user_routes);*/  /*ejemplo ruta*/ /*http://localhost:3977/api/probando-controlador*/
+
+
+*******************Codigo Util*********************
