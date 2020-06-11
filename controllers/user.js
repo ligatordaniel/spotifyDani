@@ -7,6 +7,7 @@ const pruebas = (req, res) => {
 
 const bcrypt = require('bcrypt-nodejs');
 const User = require('../models/user');
+const jwt = require('../services/jwt');
 
 /*Registro usuario*/
 const saveUser = (req, res) => {
@@ -50,10 +51,10 @@ const saveUser = (req, res) => {
 /*Registro usuario*/
 
 /*Login usuario*/
-function loginUser(req, res){
-    var params = req.body;
-    var email = params.email;
-    var password = params.password;
+const loginUser = (req, res) => {
+    let params = req.body;
+    let email = params.email;
+    let password = params.password;
     User.findOne({email: email.toLowerCase()}, (err, user) => {
         if(err){
             res.status(500).send({message:'Error en la petición'});
@@ -62,11 +63,14 @@ function loginUser(req, res){
                 res.status(404).send({message:'Usuario no existe'});
             }else{
                 //Comprobar Contraseña
-                bcrypt.compare(password, user.password, function(err,check){
+                bcrypt.compare(password, user.password, (err,check) => {
                     if(check){
-                        //devolver los datos del usuario logeado
+                        /*devolver los datos del usuario logeado*/
                         if(params.gethash){
                             //devolver token jwt
+                            res.status(200).send({  
+                                token: jwt.createToken(user)
+                            });
                         }else{
                             res.status(200).send({user});
                         }
