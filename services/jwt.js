@@ -1,3 +1,4 @@
+/* con jwt agregamos token y clave secreta*/
 'use strict'
 const jwt = require('jwt-simple');
 const moment = require('moment');

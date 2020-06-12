@@ -3,8 +3,9 @@ const express = require('express');
 const userController = require('../controllers/user');
 
 const api = express.Router();
+const md_auth = require('../middlewares/authenticated');
 
-api.get('/probando-controlador', userController.pruebas);
+api.get('/probando-controlador',md_auth.ensureAuth, userController.pruebas);
 api.post('/register', userController.saveUser);
 api.post('/login', userController.loginUser);
 
