@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express');          /*cargamos libreria express de node_modules*/
 const bodyParser = require('body-parser');   /*cargamos libreria body-parser de node_modules*/
 

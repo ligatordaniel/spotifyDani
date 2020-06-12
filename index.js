@@ -1,6 +1,6 @@
 /*Este es nuestro servidor*/
 /*npm start - iniciar servidor*/
-
+'use strict'
 const mongoose = require('mongoose');   /*cargamos libreria mongoose de node_modules*/
 const app = require('./app');           /*cargamos app.js a nuestro servidor*/
 const port = process.env.PORT || 3977;  /*configuramos un puerto (3977) para nuestro servidor*/

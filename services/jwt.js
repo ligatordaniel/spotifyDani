@@ -3,7 +3,7 @@ const jwt = require('jwt-simple');
 const moment = require('moment');
 const secret = 'clave_secreta_curso';
 
-exports.createToken = function (user){
+exports.createToken = (user) => {
     const payload = {
         sub: user._id,
         name: user.name,
