@@ -9,11 +9,11 @@ const MONGODB_URI = 'mongodb://localhost:27017/spotifyApp';
 
 
 /*conectarservidor*/
-mongoose.connect(MONGODB_URI,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
+mongoose.set('useFindAndModify', false);    /*nueva confi moongoose*/
+mongoose.Promise = global.Promise;          /*nueva confi moongoose*/
+
+mongoose.connect(MONGODB_URI,{ 
+    useNewUrlParser:true, useUnifiedTopology: true
     },(err,res) => {
     
     if(err){

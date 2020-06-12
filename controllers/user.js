@@ -1,3 +1,4 @@
+'use strict'
 const pruebas = (req, res) => {
     res.status(200).send({
         message: 'Probando acción controlador de usuarios con api rest'
@@ -83,7 +84,6 @@ const loginUser = (req, res) => {
     });
 }
 /*Login usuario*/
-
 module.exports = {
     pruebas,
     saveUser,
