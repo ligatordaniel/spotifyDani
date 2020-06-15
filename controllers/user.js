@@ -85,9 +85,9 @@ const loginUser = (req, res) => {
 }
 /*Login usuario*/
 /*Editar usuario*/
-function updateUser(req,res){
-    var userId = req.params.id;
-    var update = req.body;
+const updateUser = (req,res) => {
+    let userId = req.params.id;
+    let update = req.body;
 
     User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
         if(err){
