@@ -1,16 +1,17 @@
 'use strict'
-const pruebas = (req, res) => {
-    res.status(200).send({
-        message: 'Probando acción controlador de usuarios con api rest'
-    });
-  };
-
-
 const User = require('../models/user');
 const jwt = require('../services/jwt');
 const bcrypt = require('bcrypt-nodejs');
 const fs = require('fs');  /*modulo fs*/
 const path = require('path'); /*modulo path*/
+
+/*probar controlador*/
+const pruebas = (req, res) => {
+    res.status(200).send({
+        message: 'Probando acción controlador de usuarios con api rest'
+    });
+  };
+/*probar controlador*/
 
 /*Registro usuario*/
 const saveUser = (req, res) => {
