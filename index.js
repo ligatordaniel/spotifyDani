@@ -13,7 +13,8 @@ mongoose.set('useFindAndModify', false);    /*nueva confi moongoose*/
 mongoose.Promise = global.Promise;          /*nueva confi moongoose*/
 
 mongoose.connect(MONGODB_URI,{ 
-    useNewUrlParser:true, useUnifiedTopology: true
+    useNewUrlParser:true, 
+    useUnifiedTopology: true
     },(err,res) => {
     
     if(err){

@@ -17,4 +17,4 @@ app.use('/api', user_routes);   /*http://localhost:3977/api/probando-controlador
 
 
 
-module.exports = app;
+module.exports = app;           /*exportamos para que index.js lo importe*/

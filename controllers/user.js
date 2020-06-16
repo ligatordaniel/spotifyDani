@@ -6,9 +6,11 @@ const pruebas = (req, res) => {
   };
 
 
-const bcrypt = require('bcrypt-nodejs');
 const User = require('../models/user');
 const jwt = require('../services/jwt');
+const bcrypt = require('bcrypt-nodejs');
+const fs = require('fs');  /*modulo fs*/
+const path = require('path'); /*modulo path*/
 
 /*Registro usuario*/
 const saveUser = (req, res) => {
@@ -102,6 +104,50 @@ const updateUser = (req,res) => {
     });
 }
 /*Editar usuario*/
+/*Subir fotoPerfil*/
+const uploadImage = (req, res) => {
+    let userId = req.params.id;
+    let file_name = 'No subido...';
+
+    if(req.files){
+        let file_path = req.files.image.path;
+        let file_split = file_path.split('\\');
+        let file_name = file_split[2];
+
+        let ext_split = file_name.split('\.');
+        let file_ext = ext_split[1];
+
+        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){           
+            User.findByIdAndUpdate(userId,{image: file_name},(err, userUpdated)=>{
+                if(!userUpdated){
+                    res.status(200).send({message: 'no se puede actualizar la foto'});
+                }else{
+                    res.status(200).send({user: userUpdated});
+                }
+            });
+        }else {
+            res.status(200).send({message: 'Formato no es png, jpg o gif...'})};
+        
+    }else{
+        res.status(200).send({message: 'No has subido ninguna imagen...'});
+    }
+}
+/*Subir fotoPerfil*/
+
+/*metodo que nos devuelva fichero con img*/  /*da mas seguridad por alguna razon*/
+const getImageFile = (req,res) => {
+    let imageFile = req.params.imageFile;
+    let path_file = './uploads/users/'+imageFile;
+    
+    fs.exists(path_file, function(exists){
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+            res.status(200).send({message: 'no existe la imagen...'});
+        }
+    });
+}
+/*metodo que nos devuelva fichero con img*/
 
 
 module.exports = {
@@ -109,4 +155,6 @@ module.exports = {
     saveUser,
     loginUser,
     updateUser,
+    uploadImage,
+    getImageFile
 }
