@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');   /*cargamos libreria body-parser de 
 const app = express();          /*creamos el objeto express*/
 
 /*Cargar rutas*/
-const user_routes = require('./routes/user');       
+const user_routes = require('./routes/user');
+const artist_routes = require('./routes/artist');       
 
 app.use(bodyParser.urlencoded({extended:false}));   /*configuracion body-parser para trabajar json con http*/
 app.use(bodyParser.json());                         /*configuracion body-parser para trabajar json con http*/
@@ -14,6 +15,7 @@ app.use(bodyParser.json());                         /*configuracion body-parser 
 
 /*Rutas base*/
 app.use('/api', user_routes);   /*http://localhost:3977/api/probando-controlador*/
+app.use('/api', artist_routes);
 
 
 
