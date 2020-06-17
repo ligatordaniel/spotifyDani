@@ -6,6 +6,7 @@ const mongoosePaginate  = require('mongoose-pagination');
 const Artist = require('../models/artist');
 const Album = require('../models/album');
 const Song = require('../models/song');
+const album = require('../models/album');
 
 
 /*Get 1 artista*/
@@ -95,9 +96,49 @@ const updateArtist = (req, res) => {
 
 /*Actualizar  artista*/
 
+/*Delete  artista*/
+const deleteArtist = (req, res) => {
+    let artistId = req.params.id;
+    
+    Artist.findByIdAndRemove(artistId, (err, artistRemoved) => {
+        if(err){
+            res.status(500).send({message: 'Error al eliminar artista -servidor-'});
+        }else{
+            if(!artistRemoved){
+                res.status(404).send({message: 'Error al eliminar artista'});
+            }else{
+                Album.find({artist: artistRemoved._id}).remove((err, albumRemoved) => {
+                    if(err){
+                        res.status(500).send({message: 'album no ha sido eliminado -servidor-'});
+                    }else{
+                        if(!albumRemoved){
+                            res.status(404).send({message: 'album no ha sido eliminado'});
+                        }else{
+                            Song.find({album: albumRemoved._id}).remove((err, songRemoved) => {
+                                if(err){
+                                    res.status(500).send({message: 'Error al eliminar la cancion -servidor-'});
+                                }else{
+                                    if(!songRemoved){
+                                        res.status(404).send({message: 'Error al eliminar la cancion'});
+                                    }else{
+                                        res.status(200).send({artistRemoved});
+                                    }
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+        }
+    });
+}
+/*Delete  artista*/
+
 module.exports = {
     getArtist,
     getArtists,
     saveArtist,
-    updateArtist
+    updateArtist,
+    deleteArtist
 }
