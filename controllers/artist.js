@@ -34,7 +34,7 @@ const getArtists = (req, res) => {
         var page = 1;
     }
 
-    var itemsPerPage = 3;
+    let itemsPerPage = 20;
 
     Artist.find().sort('name').paginate(page, itemsPerPage, (err, artists, total) => {
         if(err){
@@ -75,9 +75,29 @@ const saveArtist = (req, res) => {
     });
 }
 /*Guardar  artista*/
+/*Actualizar  artista*/
+const updateArtist = (req, res) => {
+    let artistId = req.params.id;
+    let updated = req.body;
+
+    Artist.findByIdAndUpdate(artistId, updated, (err, artistUpdated) => {
+        if(err){
+            res.status(500).send({message: 'Error al guardar artista -servidor-'});
+        }else{
+            if(!artistUpdated){
+                res.status(404).send({message: 'el artista no ha actualizado'});
+            }else{
+                res.status(200).send({artist: artistUpdated});
+            }
+        }
+    });
+}
+
+/*Actualizar  artista*/
 
 module.exports = {
     getArtist,
     getArtists,
-    saveArtist
+    saveArtist,
+    updateArtist
 }

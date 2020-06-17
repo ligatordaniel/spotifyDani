@@ -87,7 +87,7 @@ const loginUser = (req, res) => {
     });
 }
 /*Login usuario*/
-/*Editar usuario*/
+/*Actualizar usuario*/
 const updateUser = (req,res) => {
     let userId = req.params.id;
     let update = req.body;
@@ -104,7 +104,7 @@ const updateUser = (req,res) => {
         }
     });
 }
-/*Editar usuario*/
+/*Actualizar usuario*/
 /*Subir fotoPerfil*/
 const uploadImage = (req, res) => {
     let userId = req.params.id;
