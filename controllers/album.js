@@ -27,6 +27,29 @@ const getAlbum = (req, res) => {
     });
 }  
 /*Get 1 Album*/
+/*Get all Album*/
+/*
+const getAlbums = (req, res) => {
+    let artistId = req.params.artist;
+    
+    if(!artistId){
+        var find = Album.find({}).sort('title');
+    }else{
+        var find = Album.find({artist: artistId}).sort('year');
+    }
+    find.populate({path: 'artist'}).exec((err, album) => {
+        if (err){
+            res.status(500).send({message:'Error de la peticion -servidor-'});
+        }else{
+            if(!album){
+                res.status(404).send({message:'No hay albums'});
+            }else{
+                res.status(200).send({albums});
+            }
+        }
+    });
+}
+/*Get all Album*/
 /*Guardar Album*/
 const saveAlbum = (req, res) => {
     let album = new Album();
@@ -54,6 +77,7 @@ const saveAlbum = (req, res) => {
 
 module.exports = {
     getAlbum,
+    /*getAlbums,*/
     saveAlbum
 }
 

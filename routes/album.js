@@ -10,6 +10,7 @@ const multipart = require('connect-multiparty'); /*necesario para img subidas ar
 const md_upload = multipart({ uploadDir: './uploads/artists'});
 
 api.get('/album/:id', md_auth.ensureAuth, ArtistController.getAlbum);
+/*api.get('/albums/:artist', md_auth.ensureAuth, ArtistController.getAlbums);*/
 api.post('/album', md_auth.ensureAuth, ArtistController.saveAlbum);
 
 
