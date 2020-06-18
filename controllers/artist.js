@@ -28,12 +28,13 @@ const getArtist = (req, res) => {
 /*Get 1 artista*/
 /*Get all artistas*/
 const getArtists = (req, res) => {
-
+    let page = '';
     if(req.params.page){
-        var page = req.params.page;
+        page = req.params.page;
     }else{
-        var page = 1;
+        page = 1;
     }
+    
     let itemsPerPage = 20;
     
     Artist.find().sort('name').paginate(page, itemsPerPage, (err, artists, total) => {
