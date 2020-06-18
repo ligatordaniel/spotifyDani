@@ -34,9 +34,8 @@ const getArtists = (req, res) => {
     }else{
         var page = 1;
     }
-
     let itemsPerPage = 20;
-
+    
     Artist.find().sort('name').paginate(page, itemsPerPage, (err, artists, total) => {
         if(err){
             res.status(500).send({message: 'error en la peticion al servidor'});
@@ -53,7 +52,6 @@ const getArtists = (req, res) => {
     });
 }
 /*Get all artistas*/
-
 /*Guardar  artista*/
 const saveArtist = (req, res) => {
     let artist = new Artist();
@@ -107,14 +105,14 @@ const deleteArtist = (req, res) => {
             if(!artistRemoved){
                 res.status(404).send({message: 'Error al eliminar artista'});
             }else{
-                Album.find({artist: artistRemoved._id}).remove((err, albumRemoved) => {
+                Album.find({artist: artistRemoved._id}).deleteOne((err, albumRemoved) => {
                     if(err){
                         res.status(500).send({message: 'album no ha sido eliminado -servidor-'});
                     }else{
                         if(!albumRemoved){
                             res.status(404).send({message: 'album no ha sido eliminado'});
                         }else{
-                            Song.find({album: albumRemoved._id}).remove((err, songRemoved) => {
+                            Song.find({album: albumRemoved._id}).deleteOne((err, songRemoved) => {
                                 if(err){
                                     res.status(500).send({message: 'Error al eliminar la cancion -servidor-'});
                                 }else{
@@ -134,11 +132,57 @@ const deleteArtist = (req, res) => {
     });
 }
 /*Delete  artista*/
+/*subir imagen artista*/
+const uploadImage = (req, res) => {
+    let artistId = req.params.id;
+    let file_name = 'No subido...';
+
+    if(req.files){
+        let file_path = req.files.image.path;
+        let file_split = file_path.split('\\');
+        let file_name = file_split[2];
+
+        let ext_split = file_name.split('\.');
+        let file_ext = ext_split[1];
+
+        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){           
+            Artist.findByIdAndUpdate(artistId,{image: file_name}, (err, artistUpdated) => {
+                if(!artistUpdated){
+                    res.status(404).send({message: 'no se puede actualizar la foto'});
+                }else{
+                    res.status(200).send({artist: artistUpdated});
+                }
+            });
+        }else {
+            res.status(200).send({message: 'Formato no es png, jpg o gif...'})};
+        
+    }else{
+        res.status(200).send({message: 'No has subido ninguna imagen...'});
+    }
+}
+/*subir imagen artista*/
+
+/*devolver img en su ubicacion*/  /*da mas seguridad por alguna razon*/
+const getImageFile = (req,res) => {
+    let imageFile = req.params.imageFile;
+    let path_file = './uploads/artists/'+imageFile;
+    
+    fs.exists(path_file, function(exists){
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+            res.status(200).send({message: 'no existe la imagen...'});
+        }
+    });
+}
+/*devolver img en su ubicacion*/
 
 module.exports = {
     getArtist,
     getArtists,
     saveArtist,
     updateArtist,
-    deleteArtist
+    deleteArtist,
+    uploadImage,
+    getImageFile
 }

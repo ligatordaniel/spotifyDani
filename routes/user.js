@@ -1,11 +1,12 @@
 'use strict'
+
 const express = require('express');
 const UserController = require('../controllers/user');
 
 const api = express.Router();
 const md_auth = require('../middlewares/authenticated'); /*nos permite usar md_auth.ensureAuth*/
 
-const multipart = require('connect-multiparty');
+const multipart = require('connect-multiparty'); /*necesario para img subidas perfil*/
 const md_upload = multipart({ uploadDir: './uploads/users'});
 
 api.get('/probando-controlador',md_auth.ensureAuth, UserController.pruebas);

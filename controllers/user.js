@@ -121,7 +121,7 @@ const uploadImage = (req, res) => {
         if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){           
             User.findByIdAndUpdate(userId,{image: file_name},(err, userUpdated)=>{
                 if(!userUpdated){
-                    res.status(200).send({message: 'no se puede actualizar la foto'});
+                    res.status(404).send({message: 'no se puede actualizar la foto'});
                 }else{
                     res.status(200).send({user: userUpdated});
                 }
@@ -135,7 +135,7 @@ const uploadImage = (req, res) => {
 }
 /*Subir fotoPerfil*/
 
-/*metodo que nos devuelva fichero con img*/  /*da mas seguridad por alguna razon*/
+/*devolver img en su ubicacion*/  /*da mas seguridad por alguna razon*/
 const getImageFile = (req,res) => {
     let imageFile = req.params.imageFile;
     let path_file = './uploads/users/'+imageFile;
@@ -148,7 +148,7 @@ const getImageFile = (req,res) => {
         }
     });
 }
-/*metodo que nos devuelva fichero con img*/
+/*devolver img en su ubicacion*/
 
 
 module.exports = {
