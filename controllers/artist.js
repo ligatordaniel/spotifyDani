@@ -60,11 +60,11 @@ const saveArtist = (req, res) => {
     let params = req.body;
     artist.name = params.name;
     artist.description = params.description;
-    artist.image = 'null'
+    artist.image = 'null';
 
     artist.save((err,artistStored) => {
         if(err){
-            res.status(404).send({message: 'Error al guardar artista'});
+            res.status(500).send({message: 'Error al guardar artista -servidor-'});
         }else{
             if(!artistStored){
                 res.status(404).send({message: 'el artista no ha sido guardado'});
