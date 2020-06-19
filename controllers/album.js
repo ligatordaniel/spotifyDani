@@ -28,16 +28,17 @@ const getAlbum = (req, res) => {
 }  
 /*Get 1 Album*/
 /*Get all Album*/
-/*
-const getAlbums = (req, res) => {
+function getAlbums(req, res) {
     let artistId = req.params.artist;
-    
+
     if(!artistId){
+        /*sacar albums de la DB*/
         var find = Album.find({}).sort('title');
     }else{
+        /*sacar albums de un artista en concreto de la DB*/
         var find = Album.find({artist: artistId}).sort('year');
     }
-    find.populate({path: 'artist'}).exec((err, album) => {
+    find.populate({path: 'artist'}).exec((err, albums) => {
         if (err){
             res.status(500).send({message:'Error de la peticion -servidor-'});
         }else{
@@ -77,7 +78,7 @@ const saveAlbum = (req, res) => {
 
 module.exports = {
     getAlbum,
-    /*getAlbums,*/
+    getAlbums,
     saveAlbum
 }
 
