@@ -52,6 +52,7 @@ const getAlbums = (req, res) => {
     });
 }
 /*Get all Albums*/
+
 /*Guardar Album*/
 const saveAlbum = (req, res) => {
     let album = new Album();
@@ -77,12 +78,28 @@ const saveAlbum = (req, res) => {
 }
 /*Guardar Album*/
 
+/*Actualizar Album*/
+const updateAlbum = (req, res) => {
+    let albumId = req.params.id;
+    let updated = req.body;
+
+    Album.findByIdAndUpdate(albumId, updated, (err, albumUpdated) => {
+        if(err){
+            res.status(500).send({message: 'Error al guardar album -servidor-'});
+        }else{
+            if(!albumUpdated){
+                res.status(404).send({message: 'el album no ha actualizado'});
+            }else{
+                res.status(200).send({album: albumUpdated});
+            }
+        }
+    });
+}
+/*Actualizar Album*/
+
 module.exports = {
     getAlbum,
     getAlbums,
-    saveAlbum
+    saveAlbum,
+    updateAlbum
 }
-
-/*
-https://www.udemy.com/course/desarrollo-web-con-javascript-angular-nodejs-y-mongodb/learn/lecture/6446816#questions/11275106
-*/

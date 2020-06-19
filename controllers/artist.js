@@ -75,6 +75,7 @@ const saveArtist = (req, res) => {
     });
 }
 /*Guardar  artista*/
+
 /*Actualizar  artista*/
 const updateArtist = (req, res) => {
     let artistId = req.params.id;
@@ -92,7 +93,6 @@ const updateArtist = (req, res) => {
         }
     });
 }
-
 /*Actualizar  artista*/
 
 /*Delete  artista*/
