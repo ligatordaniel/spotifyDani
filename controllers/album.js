@@ -97,9 +97,38 @@ const updateAlbum = (req, res) => {
 }
 /*Actualizar Album*/
 
+/*Delete Album*/
+const deleteAlbum = (req, res) => {
+    let albumId = req.params.id;
+    
+        Album.findByIdAndRemove(albumId, (err, albumRemoved) => {
+            if(err){
+                res.status(500).send({message: 'Error al eliminar album -servidor-'});
+            }else{
+                if(!albumRemoved){
+                    res.status(404).send({message: 'album no ha sido eliminado'});
+                }else{
+                    Song.find({album: albumRemoved._id}).deleteOne((err, songRemoved) => {
+                      if(err){
+                        res.status(500).send({message: 'Error al eliminar la cancion -servidor-'});
+                      }else{
+                        if(!songRemoved){
+                            res.status(404).send({message: 'Error al eliminar la cancion'});
+                        }else{
+                            res.status(200).send({albumRemoved});
+                        }
+                    }
+                });
+            }
+        }
+    });
+}
+/*Delete Album*/
+
 module.exports = {
     getAlbum,
     getAlbums,
     saveAlbum,
-    updateAlbum
+    updateAlbum,
+    deleteAlbum
 }

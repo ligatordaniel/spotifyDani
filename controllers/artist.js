@@ -133,6 +133,7 @@ const deleteArtist = (req, res) => {
     });
 }
 /*Delete  artista*/
+
 /*subir imagen artista*/
 const uploadImage = (req, res) => {
     let artistId = req.params.id;
