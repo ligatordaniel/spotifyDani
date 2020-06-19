@@ -6,7 +6,7 @@ const mongoosePaginate  = require('mongoose-pagination');
 const Artist = require('../models/artist');
 const Album = require('../models/album');
 const Song = require('../models/song');
-const album = require('../models/album');
+
 
 
 /*Get 1 Album*/
@@ -43,7 +43,7 @@ const getAlbums = (req, res) => {
         if (err){
             res.status(500).send({message:'Error de la peticion -servidor-'});
         }else{
-            if(!album){
+            if(!Album){
                 res.status(404).send({message:'No hay albums'});
             }else{
                 res.status(200).send({albums});
