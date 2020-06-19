@@ -27,16 +27,17 @@ const getAlbum = (req, res) => {
     });
 }  
 /*Get 1 Album*/
-/*Get all Album*/
-function getAlbums(req, res) {
+/*Get all Albums*/
+const getAlbums = (req, res) => {
     let artistId = req.params.artist;
+    let find = '';
 
     if(!artistId){
         /*sacar albums de la DB*/
-        var find = Album.find({}).sort('title');
+        find = Album.find({}).sort('title');
     }else{
-        /*sacar albums de un artista en concreto de la DB*/
-        var find = Album.find({artist: artistId}).sort('year');
+        /*sacar albums de un artista en concreto con su id desde la DB*/
+        find = Album.find({artist: artistId}).sort('year');
     }
     find.populate({path: 'artist'}).exec((err, albums) => {
         if (err){
@@ -50,7 +51,7 @@ function getAlbums(req, res) {
         }
     });
 }
-/*Get all Album*/
+/*Get all Albums*/
 /*Guardar Album*/
 const saveAlbum = (req, res) => {
     let album = new Album();
