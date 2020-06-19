@@ -7,7 +7,7 @@ const api = express.Router();
 const md_auth = require ('../middlewares/authenticated');
 
 const multipart = require('connect-multiparty'); /*necesario para img subidas artista*/
-const md_upload = multipart({ uploadDir: './uploads/artists'});
+const md_upload = multipart({ uploadDir: './uploads/albums'});
 
 api.get('/album/:id', md_auth.ensureAuth, AlbumController.getAlbum);
 api.get('/albums/:artist', md_auth.ensureAuth, AlbumController.getAlbums);
