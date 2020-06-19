@@ -1,7 +1,7 @@
 'use strict'
 
 const express = require('express');
-const ArtistController = require('../controllers/album');
+const AlbumController = require('../controllers/album');
 
 const api = express.Router();
 const md_auth = require ('../middlewares/authenticated');
@@ -9,10 +9,12 @@ const md_auth = require ('../middlewares/authenticated');
 const multipart = require('connect-multiparty'); /*necesario para img subidas artista*/
 const md_upload = multipart({ uploadDir: './uploads/artists'});
 
-api.get('/album/:id', md_auth.ensureAuth, ArtistController.getAlbum);
-api.get('/albums/:artist', md_auth.ensureAuth, ArtistController.getAlbums);
-api.post('/album', md_auth.ensureAuth, ArtistController.saveAlbum);
-api.put('/album/:id', md_auth.ensureAuth, ArtistController.updateAlbum);
-api.delete('/album/:id', md_auth.ensureAuth, ArtistController.deleteAlbum);
+api.get('/album/:id', md_auth.ensureAuth, AlbumController.getAlbum);
+api.get('/albums/:artist', md_auth.ensureAuth, AlbumController.getAlbums);
+api.post('/album', md_auth.ensureAuth, AlbumController.saveAlbum);
+api.put('/album/:id', md_auth.ensureAuth, AlbumController.updateAlbum);
+api.delete('/album/:id', md_auth.ensureAuth, AlbumController.deleteAlbum);
+api.post('/upload-image-album/:id',[md_auth.ensureAuth, md_upload], AlbumController.uploadImage);
+api.get('/get-image-album/:imageFile', AlbumController.getImageFile);
 
 module.exports = api;

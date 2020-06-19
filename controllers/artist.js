@@ -147,7 +147,7 @@ const uploadImage = (req, res) => {
         let ext_split = file_name.split('\.');
         let file_ext = ext_split[1];
 
-        if(file_ext == 'png' || file_ext == 'jpg' || file_ext == 'gif'){           
+        if(file_ext === 'png' || file_ext === 'jpg' || file_ext === 'gif'){           
             Artist.findByIdAndUpdate(artistId,{image: file_name}, (err, artistUpdated) => {
                 if(!artistUpdated){
                     res.status(404).send({message: 'no se puede actualizar la foto'});
@@ -164,7 +164,7 @@ const uploadImage = (req, res) => {
 }
 /*subir imagen artista*/
 
-/*devolver img en su ubicacion*/  /*da mas seguridad por alguna razon*/
+/*vizualizar img con ubicacion*/  /*da mas seguridad por alguna razon*/
 const getImageFile = (req,res) => {
     let imageFile = req.params.imageFile;
     let path_file = './uploads/artists/'+imageFile;
@@ -177,7 +177,7 @@ const getImageFile = (req,res) => {
         }
     });
 }
-/*devolver img en su ubicacion*/
+/*vizualizar img con ubicacion*/
 
 module.exports = {
     getArtist,

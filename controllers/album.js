@@ -125,10 +125,57 @@ const deleteAlbum = (req, res) => {
 }
 /*Delete Album*/
 
+/*subir imagen Album*/
+const uploadImage = (req, res) => {
+    const albumId = req.params.id;
+    const file_name = 'No subido...';   
+
+    if(req.files){
+        const file_path = req.files.image.path;
+        const file_split = file_path.split('\\');
+        const file_name = file_split[2];
+
+        const ext_split = file_name.split('\.');
+        const file_ext = ext_split[1];
+
+        if(file_ext === 'png' || file_ext === 'jpg' || file_ext === 'gif'){           
+            Album.findByIdAndUpdate(albumId,{image: file_name}, (err, albumUpdated) => {
+                if(!albumUpdated){
+                    res.status(404).send({message: 'no se puede actualizar la foto'});
+                }else{
+                    res.status(200).send({album: albumUpdated});
+                }
+            });
+        }else {
+            res.status(200).send({message: 'Formato no es png, jpg o gif...'})};
+        
+    }else{
+        res.status(200).send({message: 'No has subido ninguna imagen...'});
+    }
+}
+/*subir imagen Album*/
+
+/*vizualizar img con ubicacion*/  /*da mas seguridad por alguna razon*/
+const getImageFile = (req,res) => {
+    const imageFile = req.params.imageFile;
+    const path_file = './uploads/albums/'+imageFile;
+    
+    fs.exists(path_file, function(exists){
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+            res.status(200).send({message: 'no existe la imagen...'});
+        }
+    });
+}
+/*vizualizar img con ubicacion*/
+
 module.exports = {
     getAlbum,
     getAlbums,
     saveAlbum,
     updateAlbum,
-    deleteAlbum
+    deleteAlbum,
+    uploadImage,
+    getImageFile
 }
