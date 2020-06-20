@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');   /*cargamos libreria body-parser de 
 
 const app = express();          /*creamos el objeto express*/
 
-/*Cargar rutas*/
+/*Cargar rutas*/    
 const user_routes = require('./routes/user');
 const artist_routes = require('./routes/artist');
 const album_routes = require('./routes/album');
