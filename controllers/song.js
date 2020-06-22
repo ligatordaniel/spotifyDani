@@ -111,7 +111,7 @@ const updateSong = (req,res) => {
 const deleteSong = (req, res) => {
     const songId = req.params.id;
     
-    Song.findByIdAndDelete(songId, (err,songRemoved) => {
+    Song.findByIdAndRemove(songId, (err,songRemoved) => {
         if(err){
             res.status(500).send({message: 'Error al eliminar la canción -servidor-'});
         }else{
