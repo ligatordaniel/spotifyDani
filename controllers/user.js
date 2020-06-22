@@ -130,7 +130,7 @@ const uploadImage = (req, res) => {
             res.status(200).send({message: 'Formato no es png, jpg o gif...'})};
         
     }else{
-        res.status(200).send({message: 'No has subido ninguna imagen...'});
+        res.status(200).send({message: 'No has subido ninguna imagen....'});
     }
 }
 /*Subir fotoPerfil*/
