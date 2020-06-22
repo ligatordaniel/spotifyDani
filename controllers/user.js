@@ -15,8 +15,8 @@ const pruebas = (req, res) => {
 
 /*Registro usuario*/
 const saveUser = (req, res) => {
-    let user = new User();
-    let params = req.body;
+    const user = new User();
+    const params = req.body;
 
     console.log(params);
     
@@ -56,9 +56,9 @@ const saveUser = (req, res) => {
 
 /*Login usuario*/
 const loginUser = (req, res) => {
-    let params = req.body;
-    let email = params.email;
-    let password = params.password;
+    const params = req.body;
+    const email = params.email;
+    const password = params.password;
     User.findOne({email: email.toLowerCase()}, (err, user) => {
         if(err){
             res.status(500).send({message:'Error en la petición'});
@@ -89,8 +89,8 @@ const loginUser = (req, res) => {
 /*Login usuario*/
 /*Actualizar usuario*/
 const updateUser = (req,res) => {
-    let userId = req.params.id;
-    let update = req.body;
+    const userId = req.params.id;
+    const update = req.body;
 
     User.findByIdAndUpdate(userId, update, (err, userUpdated) => {
         if(err){
@@ -107,16 +107,16 @@ const updateUser = (req,res) => {
 /*Actualizar usuario*/
 /*Subir fotoPerfil*/
 const uploadImage = (req, res) => {
-    let userId = req.params.id;
-    let file_name = 'No subido...';
+    const userId = req.params.id;
+    const file_name = 'No subido...';
 
     if(req.files){
-        let file_path = req.files.image.path;
-        let file_split = file_path.split('\\');
-        let file_name = file_split[2];
+        const file_path = req.files.image.path;
+        const file_split = file_path.split('\\');
+        const file_name = file_split[2];
 
-        let ext_split = file_name.split('\.');
-        let file_ext = ext_split[1];
+        const ext_split = file_name.split('\.');
+        const file_ext = ext_split[1];
 
         if(file_ext === 'png' || file_ext === 'jpg' || file_ext === 'gif'){           
             User.findByIdAndUpdate(userId,{image: file_name},(err, userUpdated)=>{
@@ -137,8 +137,8 @@ const uploadImage = (req, res) => {
 
 /*visualizar foto de perfil*/  /*da mas seguridad por alguna razon*/
 const getImageFile = (req,res) => {
-    let imageFile = req.params.imageFile;
-    let path_file = './uploads/users/'+imageFile;
+    const imageFile = req.params.imageFile;
+    const path_file = './uploads/users/'+imageFile;
     
     fs.exists(path_file, function(exists){
         if(exists){

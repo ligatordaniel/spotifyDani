@@ -11,7 +11,7 @@ const Song = require('../models/song');
 
 /*Get 1 artista*/
 const getArtist = (req, res) => {
-    let artistId = req.params.id;
+    const artistId = req.params.id;
 
     Artist.findById(artistId, (err, artist) => {
         if(err){
@@ -55,9 +55,9 @@ const getArtists = (req, res) => {
 /*Get all artistas*/
 /*Guardar  artista*/
 const saveArtist = (req, res) => {
-    let artist = new Artist();
+    const artist = new Artist();
 
-    let params = req.body;
+    const params = req.body;
     artist.name = params.name;
     artist.description = params.description;
     artist.image = 'null';
@@ -78,8 +78,8 @@ const saveArtist = (req, res) => {
 
 /*Actualizar  artista*/
 const updateArtist = (req, res) => {
-    let artistId = req.params.id;
-    let updated = req.body;
+    const artistId = req.params.id;
+    const updated = req.body;
 
     Artist.findByIdAndUpdate(artistId, updated, (err, artistUpdated) => {
         if(err){
@@ -97,7 +97,7 @@ const updateArtist = (req, res) => {
 
 /*Delete  artista*/
 const deleteArtist = (req, res) => {
-    let artistId = req.params.id;
+    const artistId = req.params.id;
     
     Artist.findByIdAndRemove(artistId, (err, artistRemoved) => {
         if(err){
@@ -136,16 +136,16 @@ const deleteArtist = (req, res) => {
 
 /*subir imagen artista*/
 const uploadImage = (req, res) => {
-    let artistId = req.params.id;
-    let file_name = 'No subido...';
+    const artistId = req.params.id;
+    const file_name = 'No subido...';
 
     if(req.files){
-        let file_path = req.files.image.path;
-        let file_split = file_path.split('\\');
-        let file_name = file_split[2];
+        const file_path = req.files.image.path;
+        const file_split = file_path.split('\\');
+        const file_name = file_split[2];
 
-        let ext_split = file_name.split('\.');
-        let file_ext = ext_split[1];
+        const ext_split = file_name.split('\.');
+        const file_ext = ext_split[1];
 
         if(file_ext === 'png' || file_ext === 'jpg' || file_ext === 'gif'){           
             Artist.findByIdAndUpdate(artistId,{image: file_name}, (err, artistUpdated) => {
@@ -166,8 +166,8 @@ const uploadImage = (req, res) => {
 
 /*vizualizar img con ubicacion*/  /*da mas seguridad por alguna razon*/
 const getImageFile = (req,res) => {
-    let imageFile = req.params.imageFile;
-    let path_file = './uploads/artists/'+imageFile;
+    const imageFile = req.params.imageFile;
+    const path_file = './uploads/artists/'+imageFile;
     
     fs.exists(path_file, function(exists){
         if(exists){
