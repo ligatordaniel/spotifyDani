@@ -76,10 +76,10 @@ const saveSong = (req, res) => {
 
     song.save((err,songStored) => {
         if(err){
-            res.status(500).send({message: 'Error al guardar song -servidor-'});
+            res.status(500).send({message: 'Error al guardar canción -servidor-'});
         }else{
             if(!songStored){
-                res.status(404).send({message: 'el song no ha sido guardado'});
+                res.status(404).send({message: 'la canción no ha sido guardado'});
             }else{
                 res.status(200).send({song: songStored});
             }
@@ -88,8 +88,48 @@ const saveSong = (req, res) => {
 }
 /*Guardar Song*/
 
+/*Update Song*/
+const updateSong = (req,res) => {
+    const songId = req.params.id;
+    const update = req.body;
+
+    Song.findByIdAndUpdate(songId, update, (err, songUpdated) => {
+        if(err){
+            res.status(500).send({message: 'Error al actualizar canción -servidor-'});
+        }else{
+            if(!songUpdated){
+                res.status(404).send({send: 'Error al actualizar canción -conexión-'});    
+            }else{
+                res.status(200).send({songUpdated});
+            }
+        }
+    });
+}
+/*Update Song*/
+
+/*Delete Song*/
+const deleteSong = (req, res) => {
+    const songId = req.params.id;
+    
+    Song.findByIdAndDelete(songId, (err,songRemoved) => {
+        if(err){
+            res.status(500).send({message: 'Error al eliminar la canción -servidor-'});
+        }else{
+            if(!songRemoved){
+                res.status(404).send({message: 'Error al eliminar la canción -conexión-'});
+            }else{
+                res.status(200).send({songRemoved});
+            }
+        }
+    });
+}
+/*Delete Song*/
+
+
 module.exports = {
     getSong,
     getSongs,
     saveSong,
+    updateSong,
+    deleteSong
 }
