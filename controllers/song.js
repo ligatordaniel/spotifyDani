@@ -125,11 +125,58 @@ const deleteSong = (req, res) => {
 }
 /*Delete Song*/
 
+/*Subir Canción*/
+const uploadFile = (req, res) => {
+    const songId = req.params.id;
+    const file_name = 'No subido...';   
+
+    if(req.files){
+        const file_path = req.files.file.path;
+        const file_split = file_path.split('\\');
+        const file_name = file_split[2];
+
+        const ext_split = file_name.split('\.');
+        const file_ext = ext_split[1];
+
+        if(file_ext === 'mp3' || file_ext === 'ogg'){           
+            Song.findByIdAndUpdate(songId,{file: file_name}, (err, songUpdated) => {
+                if(!songUpdated){
+                    res.status(404).send({message: 'no se puede actualizar la canción'});
+                }else{
+                    res.status(200).send({song: songUpdated});
+                }
+            });
+        }else {
+            res.status(200).send({message: 'Formato no es mp3 o ogg...'})};
+        
+    }else{
+        res.status(200).send({message: 'No has subido ninguna archivo de audio...'});
+    }
+}
+/*Subir Canción*/
+
+/*vizualizar Canción con ubicacion*/  /*da mas seguridad por alguna razon*/
+const getSongFile = (req,res) => {
+    const songFile = req.params.songFile;
+    const path_file = './uploads/songs/'+songFile;
+    
+    fs.exists(path_file, (exists) => {
+        if(exists){
+            res.sendFile(path.resolve(path_file));
+        }else{
+            res.status(200).send({message: 'el archivo de la canción no existe...'});
+        }
+    });
+}
+/*vizualizar Canción con ubicacion*/
+
 
 module.exports = {
     getSong,
     getSongs,
     saveSong,
     updateSong,
-    deleteSong
+    deleteSong,
+    uploadFile,
+    getSongFile
 }
